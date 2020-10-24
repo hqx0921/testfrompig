@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="test-promise-ajax-result"></p>
+</body>
+<script>
+    function ajax(url, method, data) {
+        var request = new XMLHttpRequest();
+        return new Promise(function (reslove, reject) {
+            request.onreadystatechange = function () {
+                if (request.readyState === 4) {
+                    if (request.status === 200) {
+                        reslove(request.responseText);
+                    } else {
+                        reject(request.status);
+                    }
+                }
+            }
+            request.open(method, url);
+            request.send(data);
+        });
+    }
+
+    var log = document.getElementById('test-promise-ajax-result');
+    var p = ajax('GET', 'https://www.sassmeister.com/');
+    p.then(function (text) {
+            log.innerHTML = text;
+        })
+        .catch(function (code) {
+            log.innerHTML = '错误代码为:' + code;
+        })
+</script>
+
+</html>

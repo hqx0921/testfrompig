@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>操作表单</title>
+</head>
+
+<body>
+    <label><input type="radio" name="weekday" id="monday" value="1">Monday</label>
+    <label><input checked="false" type="radio" name="weekday" id="tuesday" value="2">Tuesday</label>
+
+    <form id="test-form" onsubmit="return checkForm()">
+        <input type="text" name="test" id="">
+        <button type="button">Submit</button>
+    </form>
+
+    <!-- 密码有hidden属性的表单 -->
+    <form method="POST" id="login-form" onsubmit="return checkForm1()">
+        <span>用户名</span><input type="text" name="usename" id="uername">
+        <span>密码</span><input type="password" id="input-password">
+        <input type="hidden" name="password" id="md5-password">
+        <button type="submit">Submit</button>
+    </form>
+
+
+    <!-- HTML结构 -->
+    <form id="test-register" action="#" target="_blank" onsubmit="return checkRegisterForm()">
+        <p id="test-error" style="color:red"></p>
+        <p>
+            用户名: <input type="text" id="username" name="username">
+        </p>
+        <p>
+            口令: <input type="password" id="password" name="password">
+        </p>
+        <p>
+            重复口令: <input type="password" id="password-2">
+        </p>
+        <p>
+            <button type="submit">提交</button> <button type="reset">重置</button>
+        </p>
+    </form>
+
+
+
+</body>
+<script>
+    var mon = document.getElementById('monday')
+    var tue = document.getElementById('tuesday')
+    console.log(mon.value)
+    console.log(tue.value)
+    console.log(mon.checked)
+    console.log(mon.checked)
+
+    // 表单按钮提交事件
+    function checkForm() {
+        var form = document.getElementById('test-form');
+        return true;
+    }
+
+    // 隐藏密码表单提交事件
+    function checkForm1() {
+        var input_pwd = document.getElementById('input-password');
+        var md5_pwd = document.getElementById('md5-password');
+        // 把用户输入的明文变为MD5
+        md_pwd.value = toMD5(input_pwd.value);
+
+        return true;
+    }
+
+
+    var checkRegisterForm = function () {
+        var username = document.getElementById('username');
+        var pwd = document.getElementById('password');
+        var pwd1 = document.getElementById('password-2');
+        var re_username = /[\w\d]{3,10}/;
+        var re_password = /[\d\w]{6,20}/;
+        var error = document.getElementById('test-error')
+        if (!re_username.test(username.value)) {
+            if (!re_password.test(pwd.value)) {
+                error.innerHTML = "用户名输入格式错误且密码格式错误!";
+            } else {
+                error.innerHTML = "用户名输入格式错误!";
+            }
+        } else {
+            if (!re_password.test(pwd.value)) {
+                error.innerHTML = "密码格式错误!";
+            }
+        }
+
+        if (re_username.test(username.value) && re_password.test(pwd.value) &&
+            (pwd1.value === pwd.value)) {
+            return true;
+        }
+        return false;
+    }
+</script>
+
+</html>

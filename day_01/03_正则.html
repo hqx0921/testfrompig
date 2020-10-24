@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    console.log('a b  c'.split(' '))
+    console.log('a b  c'.split(/\s+/))
+    console.log('a , ,b, c d'.split(/[\s\,]+/))
+    var re = /^(\d{3})(-)(\d{3,8})$/
+    console.log(re.exec('010-12345'))
+
+    // 贪婪匹配
+    var re = /^(\d+?)(0*)$/;
+    x = re.exec('102300'); // ['102300', '1023', '00']
+    console.log(x)
+
+    var re = /^[\w\.\d]+@[\w\d]+\.[\w]+$/;
+    console.log(re.test('bill@microsoft'))
+
+    var re = /\w/
+    console.log(re.test('WWss'))
+
+    // var re = /^<([\w\s]+)>\s([\w\.\d]+@[\w\d]+\.[\w]+)$/;
+    var re = /^<(.+)>.(.+)$/;
+    var r = re.exec('<Tom Paris> tom@voyager.org');
+    console.log(r)
+</script>
+
+<body>
+
+</body>
+
+</html>

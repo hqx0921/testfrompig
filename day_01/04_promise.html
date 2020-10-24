@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function callback() {
+        console.log('Done!');
+    }
+    console.log('before setTime()');
+    setTimeout(callback, 1000);
+    console.log('after setTimeout()')
+
+
+
+    function test(reslove, reject) {
+        var timeOut = Math.random() * 2;
+        console.log('set timeout to:' + timeOut + 'seconds');
+        setTimeout(function () {
+            if (timeOut < 1) {
+                console.log('call resolve()...')
+                reslove('200 OK')
+            } else {
+                console.log('call reject...')
+                reject('timeout in ' + timeOut + 'seconds');
+            }
+        }, timeOut * 1000)
+    }
+
+
+    // var p1 = new Promise(test);
+    // var p2 = p1.then(function (result) {
+    //     console.log('成功:' + result);
+    // });
+    // var p3 = p2.catch(function (reason) {
+    //     console.log('失败:' + reason);
+    // })
+    // 以上代码可简化成
+    // new Promise(test).then(function (result) {
+    //     console.log('成功:' + result);
+    // }).catch(function (reason) {
+    //     console.log('失败:' + reason);
+    // })
+
+
+
+
+
+
+    // 输出log到页面:
+    // function log(s) {
+    //     var p = document.createElement('p');
+    //     p.innerHTML = s;
+    //     p.id = 'test-promise-log'
+    //     logging.appendChild(p);
+    // }
+    // // 清除log:
+    // var logging = document.getElementById('test-promise-log');
+    // while (logging.children.length > 1) {
+    //     logging.removeChild(logging.children[logging.children.length - 1]);
+    // }
+    // new Promise(function (resolve, reject) {
+    //     log('start new Promise...');
+    //     var timeOut = Math.random() * 2;
+    //     log('set timeout to: ' + timeOut + ' seconds.');
+    //     setTimeout(function () {
+    //         if (timeOut < 1) {
+    //             log('call resolve()...');
+    //             resolve('200 OK');
+    //         } else {
+    //             log('call reject()...');
+    //             reject('timeout in ' + timeOut + 'seconds.');
+    //         }
+    //     }, timeOut * 1000);
+    // }).then(function (r) {
+    //     log('Done:' + r);
+    // }).catch(function (reason) {
+    //     log(' Failed: ' + reason);
+    // });
+
+
+    // 理解例子
+    function timeout(ms) {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, ms, 'done');
+        });
+    }
+
+    timeout(100).then((value) => {
+        console.log(value);
+    });
+
+
+    // 并行执行异步任务
+    var p1 = new Promise(function (reslove, reject) {
+        setTimeout(reslove, 500, 'P1hhhh');
+    });
+    var p2 = new Promise(function (reslove, reject) {
+        setTimeout(reslove, 600, "P2hhhh");
+    });
+    var p11 = new Promise(function (reslove, reject) {
+        setTimeout(reslove, 800, 'P1hhhh');
+    });
+    var p22 = new Promise(function (reslove, reject) {
+        setTimeout(reslove, 900, "P2hhhh");
+    });
+
+    Promise.all([p1, p2]).then(function (results) {
+        console.log(results)
+    })
+
+    // 同时向两个URL读取用户的个人信息，只需要获得先返回的结果即可 用Promise.race()
+    Promise.race([p11, p22]).then(function (result) {
+        console.log(result); // 'P1'
+    });
+</script>
+
+</html>

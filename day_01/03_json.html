@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Json</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+<script>
+    // 序列化
+    var xiaoming = {
+        name: '小明',
+        age: 14,
+        gender: true,
+        height: 1.65,
+        grade: null,
+        'middle-school': '\"W3C\" Middle School',
+        skills: ['JavaScript', 'Java', 'Python', 'Lisp'],
+        toJSON: function () {
+            return {
+                'Name': this.name,
+                'Age': this.age
+            }
+        }
+    };
+    console.log(JSON.stringify(xiaoming))
+    console.log(xiaoming)
+    // convert (key, value)
+    function convert(x, y) {
+        if (typeof y == "string") {
+            return y.toUpperCase();
+        }
+        return y;
+    }
+    var s = JSON.stringify(xiaoming, convert, " ")
+    // console.log(s)
+
+
+    // 反序列化 json 转js
+    JSON.parse('[1,2,3,true]'); // [1, 2, 3, true]
+    var x = JSON.parse('{"name":"小明","age":14}', function (key, value) {
+        if (key === 'age') {
+            return value + 100;
+        }
+        return value;
+    }); // Object {name: '小明', age: 14}
+    console.log(JSON.stringify(x))
+    JSON.parse('true'); // true
+    JSON.parse('123.45'); // 123.45
+
+    // 实例
+    var url = 'https://api.openweathermap.org/data/2.5/forecast?q=Beijing,cn&appid=800f49846586c3ba6e7052cfc89af16c';
+    $.getJSON(url, function (data) {
+        var info = {
+            city: data.city.name,
+            id: data.city.id,
+            country: data.city.country,
+            population: data.city.population
+        }
+        alert(JSON.stringify(info, function (key, value) {
+            if (key === 'country') {
+                return value + "中国"
+            }
+            return value;
+        }, ' '))
+    })
+</script>
+
+<body>
+
+</body>
+
+</html>

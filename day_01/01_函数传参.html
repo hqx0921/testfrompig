@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // foo(a[, b], c)
+    // 接收2~3个参数，b是可选参数，如果只传2个参数，b默认为null：
+    // function foo(a, b, c) {
+    //     if (arguments.length === 2) {
+    //         // 实际拿到的参数是a和b，c为undefined
+    //         c = b; // 把b赋给c
+    //         b = null; // b变为默认值
+    //         console.log(arguments)
+    //     }
+    //     for (var x in arguments) {
+    //         console.log(x);
+    //     }
+    //     // ...
+    // }
+
+    // function foo(a, b, ...rest) {
+    //     console.log('a=' + a);
+    //     console.log('b=' + b);
+    //     console.log(rest);
+    // }
+    // foo(1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+    function sum(a, b, ...rest) {
+        var sum = a + b;
+        console.log(rest)
+        console.log(sum)
+
+        for (var x = 0; x < rest.length; x++) {
+            sum = sum + rest[x]
+        }
+        return sum
+    }
+    console.log(sum(1, 2, 3, 4))
+</script>
+
+<body>
+
+</body>
+
+</html>

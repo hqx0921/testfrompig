@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高阶函数</title>
+</head>
+<script>
+    // map
+    function pow(x) {
+        return x * x;
+    }
+    var arr = [1, 2, 3, 4, 5];
+    var results = arr.map(pow);
+    console.log(results)
+
+    var arrr1 = [1, 2, 3, 4, 5];
+    var results1 = arr.map(String);
+    console.log(results1)
+
+    // reduce  依次对数组中的数据进行累积操作
+    var arr2 = [1, 2, 3, 4, 5];
+    var results2 = arr2.reduce(function (x, y) {
+        return x * y;
+    })
+    console.log(results2)
+
+
+    // 不用parseInt 实现 字符串转整数
+    // 先用split函数分割,再利用charCodeAt()函数,最后用reduce(0)
+    var str = "13579"
+    var str_arr = str.split("").map(function (x) {
+        // x.charCodeAt表示返回x中index为0的unicode编码
+        // 这里巧妙利用'x'与'0'之间 unicode编码差值取计算x的int值
+        return x.charCodeAt('0') - '0'.charCodeAt('0')
+    }).reduce(function (x, y) {
+        return x * 10 + y;
+    })
+    console.log(str_arr)
+    console.log('0'.charCodeAt('0'))
+
+    // filter  利用filter巧妙去重
+    var
+        r,
+        arr10 = ['apple', 'strawberry', 'banana', 'pear', 'apple', 'orange', 'orange', 'strawberry'];
+    r = arr10.filter(function (element, index, self) {
+        return self.indexOf(element) === index;
+    });
+    console.log(r.toString())
+
+    var
+        r,
+        arr = [1, 2, 3, 4, 5, 6];
+    r = arr.filter(function (element, index, self) {
+        return element % 2 === 0;
+    })
+    console.log(r.toString())
+
+    var r,
+        arr = ['aASS', 'ASSS', 'OJiJ'];
+
+    function firstUp(x) {
+        x = x.toLowerCase();
+        let x1 = x.substring(0, 1).toUpperCase();
+        let x2 = x.substring(1)
+        return x1 + x2;
+    }
+    r = arr.map(firstUp)
+    console.log(r.toString())
+
+
+    //sort 方法会对原来的数组进行直接修改
+    var a1 = ['B', 'A', 'C'];
+    var a2 = a1.sort();
+    a1; // ['A', 'B', 'C']
+    a2; // ['A', 'B', 'C']
+    a1 === a2; // true, a1和a2是同一对象
+
+    // every()方法  判断Array中的每个字符串是否满足要求
+    var arr = ['Apple', 'pear', 'orange'];
+    console.log(arr.every(function (s) {
+        return s.toLowerCase() === s;
+    }))
+
+    // foreach() 方法用于循环遍历数组  ()里表示每个数组元素要做的事件的函数
+    var arr = ['Apple', 'pear', 'orange'];
+    arr.forEach(console.log)
+</script>
+
+<body>
+
+</body>
+
+</html>

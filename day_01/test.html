@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+  </head>
+
+  <body>
+    <div></div>
+  </body>
+  <style>
+    div {
+      width: 0px;
+      height: 0px;
+      border-top: 10px solid red;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 10px solid transparent;
+    }
+  </style>
+  <script>
+    var x = [
+      1,
+      2,
+      {
+        a: 1,
+      },
+    ];
+    y = x;
+    z = [...x];
+    y[0] = 2;
+    y[2].b = 2;
+    z[2].a = 2;
+    console.log(x, y, z);
+    var arr = [1, [10, 10, 10], 2, 3];
+
+    function f1(...arr) {
+      console.log(...arr);
+    }
+    f1(arr, arr);
+    // console.log(...arr);
+    // console.log('...', arr)
+  </script>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<script type="text/javascript">
+    // 判断B是否为A的子域名
+    function isSon(A, B){
+        x = A.split("")
+        topName = A.substring(x.indexOf(".")+1, x.length)
+        return topName.toString() == B ? 'yes' : 'no'
+    }
+    console.log(isSon("mail.example.com", "example.com"))
+</script>
+<body>
+    
+</body>
+</html>

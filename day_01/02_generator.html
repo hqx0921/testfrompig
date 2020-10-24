@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>generator</title>
+
+    <script>
+        // 未使用generator的fibs
+        var
+            r,
+            a = 0,
+            b = 1,
+            arr = [a, b];
+
+        function fib(max) {
+
+            while (arr.length < max) {
+                [a, b] = [b, a + b];
+                arr.push(b);
+            }
+            return arr;
+        }
+        console.log(fib(7).toString())
+        // 使用generator函数的fibs
+
+
+        function* fibs(max) {
+            var
+                t,
+                a = 0,
+                b = 1,
+                x = 0;
+            while (x < max) {
+                yield a;
+                [a, b] = [b, a + b];
+                x++;
+            }
+            return;
+        }
+        for (var x of fibs(6)) {
+            console.log(x);
+        }
+        console.log(typeof (fibs(6)))
+
+        function* next_id() {
+            let id = 1;
+            while (true) {
+                yield id++;
+            }
+        }
+        var g = next_id()
+
+        for (let i = 0; i < 10; i++) {
+
+            console.log(g.next().value)
+        }
+
+
+        var myVar = null;
+        console.log(myVar === null)
+    </script>
+</head>
+
+
+<body>
+
+</body>
+
+</html>

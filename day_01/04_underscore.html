@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>underscore第三方库</title>
+</head>
+
+<body>
+
+</body>
+<script src="https://underscorejs.org/underscore-min.js"></script>
+<script>
+    var arr = [1, 4, 7, -3, -9]
+    console.log(_.map([1, 2, 3], (x) => x * x))
+    console.log(_.every(arr, (x) => x > 0))
+    console.log(_.max(arr))
+    // 如果作用于对象  则只会操作value  不会对键进行操作
+    console.log(_.max({
+        a: 1,
+        b: 2,
+        c: 3
+    }))
+
+    //groupBy
+    var scores = [20, 81, 75, 40, 91, 59, 77, 66, 72, 88, 99];
+    var x = _.groupBy(scores, function (a) {
+        if (a <= 40) {
+            return "A";
+        } else if (a < 75) {
+            return "B";
+        } else {
+            return "C";
+        }
+    });
+    console.log(x)
+
+    //shuffle /sample
+    _.shuffle([1, 2, 3, 4, 5, 6]); // [3, 5, 4, 6, 2, 1]
+
+    // 注意每次结果都不一样：
+    // 随机选1个：
+    _.sample([1, 2, 3, 4, 5, 6]); // 2
+    // 随机选3个：
+    _.sample([1, 2, 3, 4, 5, 6], 3); // [6, 1, 4]
+
+    console.log(Math.trunc(28.22))
+
+    console.log(0.1 + 0.2 - 0.3)
+
+    var obj = new Proxy({}, {
+        get: function (target, propKey, receiver) {
+            console.log(`getting ${propKey}!`);
+            return Reflect.get(target, propKey, receiver);
+        },
+        set: function (target, propKey, value, receiver) {
+            console.log(`setting ${propKey}!`);
+            return Reflect.set(target, propKey, value, receiver);
+        }
+    });
+    obj.count = 1
+        //  setting count!
+        ++obj.count
+</script>
+
+</html>

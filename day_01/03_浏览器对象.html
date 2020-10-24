@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器对象</title>
+</head>
+
+<body>
+    <button id="b1">按钮1</button>
+    <button id="b2">按钮2</button>
+    <button id="b3">按钮3</button>
+    <p id="p-id">hi 我是p标签</p>
+
+    <p id="js">JavaScript</p>
+    <div id="list">
+        <p id="java">Java</p>
+        <p id="python">Python</p>
+        <p id="scheme">Scheme</p>
+    </div>
+</body>
+<script>
+    // lacation 对象表示当前页面的URL信息.
+    // console.log(location.href)
+    // console.log(location.protocol); // 'http'
+    // console.log(location.host); // 'www.example.com'
+    // console.log(location.port); // '8080'
+    // console.log(location.pathname) // '/path/index.html'
+    // console.log(location.search); // '?a=1&b=2'
+    // console.log(location.hash); // 'TOP'
+
+    // 加载新的页面
+    // location.assign()
+    // 重载页面
+    // location.reload()
+
+    // var x = document.getElementsByTagName('button');
+    // console.log(history);
+    var js = document.getElementById('js')
+    var list = document.getElementById('list'),
+        python = document.getElementById('python')
+    list.append(js)
+    var haskell = document.createElement('p')
+    haskell.id = 'haskell'
+    haskell.innerText = '我是插入的内容'
+    // list.appendChild(haskell)
+
+
+
+    var po = document.getElementById('p-id')
+    po.innerHTML = 'ABC';
+    po.style.color = '#ff0000';
+    po.style.fontSize = '20px';
+    po.style.paddingTop = '2em';
+
+    var d = document.createElement('style')
+    d.setAttribute('type', 'text/css')
+    d.innerHTML = 'p{color:blue}'
+    document.getElementsByTagName('head')[0].appendChild(d);
+    //插入到指定位置
+    list.insertBefore(haskell, python)
+</script>
+
+</html>

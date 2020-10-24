@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // 养成习惯
+    var piggy = {}
+    piggy.name = 'piggy'
+
+    // 变量提升  但是不会提升变量赋值
+    function foo() {
+        var x = 'hello  ' + u;
+        console.log(x) // hello  undefined
+        var u = 'piggy'
+    }
+    foo()
+
+    window.alert('调用window.alert()');
+    // 把alert保存到另一个变量:
+    var old_alert = window.alert;
+    // 给alert赋一个新函数:
+    window.alert = function () {}
+    alert('无法用alert()显示了!');
+
+    // 恢复alert:
+    // window.alert = old_alert;
+    // alert('又可以用alert()了!');
+
+    // 解决块级作用域 引入let
+    function foo() {
+        var sum = 0;
+        for (let i = 0; i < 100; i++) {
+            sum += i;
+        }
+        // 下面语句会八错SyntaxError
+        // i += 1;
+    }
+
+    // 常量
+    const PI = 3.123;
+
+
+    // 解构赋值
+    var person = {
+        name: '小明',
+        age: 20,
+        gender: 'male',
+        passport: 'G-123',
+        school: 'No.4 middle school'
+    };
+    var {
+        name,
+        age,
+        gender
+    } = person
+    console.log(name + age + gender)
+
+
+    // 声明变量:
+    var x, y;
+    // 解构赋值:
+    // {x, y} = { name: '小明', x: 100, y: 200};
+    // 语法错误: Uncaught SyntaxError: Unexpected token =
+    // 正确写法:
+    ({
+        x,
+        y
+    } = {
+        name: '小明',
+        x: 100,
+        y: 200
+    });
+
+
+    function swap1() {
+        var
+            x = 2,
+            y = 5;
+        console.log(x)
+        console.log(y)
+
+        x = x > y ? x - (x - y) : x + (y - x);
+        y = y > x ? y - (y - x) : y + (x - y);
+        console.log(x)
+        console.log(y)
+    }
+    swap1()
+    var {
+        hostname: domain,
+        pathname: path
+    } = location;
+    console.log('域名:', domain)
+    console.log('lujing:', path)
+    console.log(location)
+
+    function buildDate({
+        year,
+        month,
+        day,
+        hour = 0,
+        minute = 0,
+        second = 0
+    }) {
+        return new Date(year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second);
+    }
+    console.log(buildDate({
+        year: 2017,
+        month: 1,
+        day: 1
+    }));
+    console.log(buildDate({
+        year: 2017,
+        month: 1,
+        day: 1,
+        hour: 20,
+        minute: 15
+    }));
+    console.log(buildDate({
+        year: 2017,
+        month: 1,
+        day: 1,
+        hour: 20,
+        minute: 15,
+        second: 25
+    }))
+
+
+    // 方法中重构 this指向undefined的解决方法
+    var xiaoming = {
+        name: '小明',
+        birth: 1990,
+        age: function () {
+            var that = this; // 在方法内部一开始就捕获this
+            function getAgeFromBirth() {
+                var y = new Date().getFullYear();
+                return y - that.birth; // 用that而不是this
+            }
+            return getAgeFromBirth();
+        }
+    };
+
+    xiaoming.age(); // 25
+
+    // apply方法 可以指定方法中this的指向对象
+    var piggy = {
+        name: 'piggy',
+        birth: 1998,
+        age: getAge
+    }
+
+    function getAge() {
+        var time = new Date().getFullYear();
+        return time - this.birth
+    }
+    console.log(piggy.age())
+    console.log(getAge.apply(piggy, []))
+
+
+    // apply() 与 call()
+    Math.max.apply(null, [3, 5, 4]); // 5
+    Math.max.call(null, 3, 5, 4); // 5
+</script>
+
+<body>
+
+</body>
+
+</html>

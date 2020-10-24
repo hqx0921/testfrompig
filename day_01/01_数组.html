@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // 直接给数组长度复制会改变数组
+    var arr = [1, 2, 3]
+    arr.length = 6; // 1,2,3,undefined*3
+    // 直接通过索引改变数组元素,如果下标越界也会改变数组
+    arr[6] = 7; // 1,2,3,undefined*3,7
+
+    // 随意在js中要谨慎修改数组的长度,访问索引时要确保索引不会月结
+
+    // 1 indexOf()
+    arr.indexOf(0); // 通过元素搜索它在数组的索引位置
+
+    // 2 slice(a,b) 分割索引从a到b的元素  
+    // 2 slice(a) 分割索引从a开始到结束的所有元素
+    arr.slice()
+
+    // 3 push()和pop()  操作数组最后一个元素
+    // 4 shift 和 unshift  // 操作数组的第一个元素
+
+    // 5 splice()
+    var arr1 = [1, 2, 3, 4, 5]
+
+    // 从索引位置1开始删除2个元素并在那里增加change1和change2
+    // 并且会返回被删除的两个元素
+    arr1.splice(1, 2, "change1", "change2")
+
+    // 6 concat()
+    var arr2 = ['A', 'B', 'C']
+    // 合并的数组嵌套有数组也会被直接拆分  最后只返回一个数组
+    var add = arr2.concat([1, 2, [3, 4]]); //['A', 'B', 'C', 1, 2, 3, 4]
+</script>
+
+<body>
+
+</body>
+
+</html>

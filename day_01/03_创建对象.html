@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>面向对象编程</title>
+</head>
+<script>
+    // 原型对象:
+    var Student = {
+        name: 'Robot',
+        height: 1.2,
+        run: function () {
+            console.log(this.name + ' is running...');
+            console.log(this.height + '米');
+        }
+    };
+
+    function createStudent(name, height) {
+        var s = Object.create(Student);
+        s.name = name;
+        s.height = height;
+        return s;
+    }
+    var xiaoming = createStudent('小明', 2.1);
+    xiaoming.run()
+    console.log(xiaoming.__proto__ === Student)
+
+    // 名字不同但是方法不同  节省内存 将方法写到对象的原型上
+
+    //  这是构造函数  被new就变成对象
+    function Student1(name) {
+        this.name = name
+    }
+    Student1.prototype.hello = function () {
+        alert('Hello' + this.name + '!');
+    }
+    var xiaoming = new Student1('xiaoming');
+    xiaoming.hello();
+
+    // 参数可传可不传的写法
+    function Student1(pros) {
+        this.name = pros.name || 'undefined'
+    }
+    Student1.prototype.hello = function () {
+        alert('Hello' + this.name + '!');
+    }
+
+    function createStudent1(pros) {
+        return new Student1(pros || {})
+    }
+</script>
+
+<body>
+
+</body>
+
+</html>
